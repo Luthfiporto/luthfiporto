@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portofolio — Muhammad Luthfi Nurul Iman</title>
+  <meta name="description" content="Portofolio profesional, modern, dan minimalis untuk designer, programmer, videografer, dan kreator digital." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #0f172a;      /* slate-900 */
+      --muted: #64748b;     /* slate-500 */
+      --line: #e2e8f0;      /* slate-200 */
+      --accent: #0ea5e9;    /* aksen profesional (biru cyan) */
+      --card: #f8fafc;      /* slate-50 */
+      --shadow: 0 8px 30px rgba(2, 6, 23, 0.08);
+      --radius: 16px;
+      --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    /* Reset ringkas */
+    *,*::before,*::after{ box-sizing: border-box }
+    html,body{ margin:0; padding:0 }
+    body{ background:var(--bg); color:var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif }
+    img,video{ max-width:100%; height:auto; display:block; border-radius:12px }
+    a{ color:inherit; text-decoration:none }
+    .container{ width:min(1100px, 92%); margin:0 auto }
+
+    /* Navigasi */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: saturate(180%) blur(8px);
+      background: rgba(255,255,255,0.75);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:14px 0 }
+    .brand{ font-weight:700; letter-spacing:0.2px }
+    .brand .dot{ color:var(--accent) }
+    .menu{ display:flex; gap:26px }
+    .menu a{ color:var(--muted); font-weight:500 }
+    .menu a:hover{ color:var(--text) }
+    .cta-small{ padding:8px 14px; border:1px solid var(--line); border-radius:999px }
+    .cta-small:hover{ border-color:var(--accent); color:var(--accent) }
+
+    /* Hero */
+    .hero{ padding:96px 0 72px }
+    .hero-grid{ display:grid; grid-template-columns: 1.2fr 0.8fr; gap:40px }
+    .headline{ font-size: clamp(28px, 5vw, 48px); line-height:1.1; font-weight:700; letter-spacing:-0.3px }
+    .sub{ margin-top:16px; color:var(--muted); font-size: clamp(16px, 2.6vw, 18px) }
+    .actions{ margin-top:28px; display:flex; gap:14px; flex-wrap:wrap }
+    .btn{ padding:14px 18px; border-radius:999px; font-weight:600; transition: all .26s var(--ease) }
+    .btn-primary{ background:var(--accent); color:#fff; box-shadow: var(--shadow) }
+    .btn-primary:hover{ transform: translateY(-1px); opacity:0.96 }
+    .btn-outline{ border:1px solid var(--line); background:#fff }
+    .btn-outline:hover{ border-color:var(--accent); color:var(--accent) }
+    .hero-card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px }
+    .hero-card p{ color:var(--muted); font-size:14px }
+    .meta{ display:flex; gap:16px; margin-top:12px; flex-wrap:wrap }
+    .meta-item{ font-size:12px; color:var(--muted) }
+
+    /* Section base */
+    section{ padding:72px 0 }
+    .section-head{ display:flex; align-items:end; justify-content:space-between; margin-bottom:28px }
+    .section-title{ font-size:28px; font-weight:700 }
+    .section-desc{ color:var(--muted) }
+
+    /* Portfolio grid */
+    .grid{
+      display:grid; gap:20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .card{
+      background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+      transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: var(--shadow); border-color:#dfe3e8 }
+    .card-media{ position:relative; aspect-ratio: 16/10; overflow:hidden }
+    .badge{
+      position:absolute; top:12px; left:12px; background:rgba(0,0,0,0.7); color:#fff; font-size:12px;
+      padding:6px 10px; border-radius:999px;
+    }
+    .card-body{ padding:16px }
+    .card-title{ font-weight:600 }
+    .card-role{ color:var(--muted); font-size:14px; margin-top:4px }
+    .card-desc{ color:var(--muted); font-size:14px; margin-top:10px }
+
+    /* Skills */
+    .skills{ display:grid; grid-template-columns: repeat(3, 1fr); gap:20px }
+    .skill{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:16px }
+    .skill-head{ display:flex; align-items:center; gap:12px; font-weight:600 }
+    .skill-icon{ width:32px; height:32px; border-radius:8px; background:var(--card); display:grid; place-items:center; color:var(--accent); font-weight:700 }
+    .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px }
+    .tag{ font-size:12px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted) }
+
+    /* Contact */
+    .contact{ display:grid; grid-template-columns: 1.2fr 0.8fr; gap:28px }
+    .contact-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px }
+    .contact-list{ display:grid; gap:12px; margin-top:12px }
+    .contact-item{ display:flex; align-items:center; justify-content:space-between; padding:12px; border:1px dashed var(--line); border-radius:10px }
+    .contact-item a{ color:var(--muted) }
+    .contact-item a:hover{ color:var(--accent) }
+    .cv{ display:flex; align-items:center; gap:12px; margin-top:16px }
+    .cv .btn-outline{ padding:12px 16px }
+
+    /* Footer */
+    footer{ padding:32px 0; border-top:1px solid var(--line); color:var(--muted) }
+
+    /* Animasi muncul (fade-in) */
+    .reveal{ opacity:0; transform: translateY(8px); transition: opacity .6s var(--ease), transform .6s var(--ease) }
+    .reveal.show{ opacity:1; transform: translateY(0) }
+
+    /* Interaksi kartu */
+    .zoomable{ cursor: zoom-in }
+    .card-media:hover img,
+    .card-media:hover video{ transform: scale(1.02); transition: transform .24s var(--ease) }
+
+    /* Modal (lightbox) */
+    .modal{
+      position: fixed; inset: 0; z-index: 1000; display: none;
+      align-items: center; justify-content: center; padding: 24px;
+      background: rgba(0,0,0,0.6);
+    }
+    .modal.active{ display:flex }
+    /* Background blur saat modal aktif */
+    .blur-bg{ filter: blur(6px); transition: filter .2s var(--ease) }
+
+    .modal-inner{
+      width: min(1100px, 92%); max-height: 90vh; background: #000; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.45); position: relative;
+    }
+    .modal-media{ width:100%; height: auto; display:block; background:#000 }
+    .modal-iframe{ width:100%; height: min(70vh, 720px); border:0; display:block; background:#0b0b0b }
+    .modal-close{
+      position: absolute; top: 12px; right: 12px; z-index: 10;
+      background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(6px);
+      padding: 8px 12px; border-radius: 999px; font-weight:600; cursor: pointer;
+    }
+    .modal-close:hover{ background: rgba(255,255,255,0.24) }
+
+    /* Responsif */
+    @media (max-width: 980px){
+      .hero-grid, .contact{ grid-template-columns: 1fr }
+      .grid{ grid-template-columns: repeat(2, 1fr) }
+      .skills{ grid-template-columns: repeat(2, 1fr) }
+    }
+    @media (max-width: 640px){
+      .menu{ display:none } /* sederhanakan di mobile */
+      .grid{ grid-template-columns: 1fr }
+      .skills{ grid-template-columns: 1fr }
+      .headline{ font-size: clamp(24px, 8vw, 36px) }
+    }
+
+    /* Hormati preferensi gerak */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="nav" aria-label="Navigasi utama">
+    <div class="container nav-inner">
+      <div class="brand">Luthfi Porto's<span class="dot">.</span></div>
+      <div class="menu">
+        <a href="#home">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="cta-small">Hubungi</a>
+    </div>
+  </nav>
+
+  <!-- Konten utama (akan diblur saat modal aktif) -->
+  <div id="page" class="page">
+    <main>
+      <!-- Home -->
+      <section id="home" class="hero container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <h1 class="headline">Saya Luthfi, Membantu mendesain brand/produk tampil jelas, fungsional, dan menarik.</h1>
+            <p class="sub">Designer, Programmer, Videografer — menggabungkan estetika, performa, dan storytelling untuk hasil yang berdampak.</p>
+            <div class="actions">
+              <a href="#portfolio" class="btn btn-primary">Lihat Portofolio</a>
+              <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+            </div>
+            <div class="meta">
+              <span class="meta-item">• ±2 tahun pengalaman</span>
+              <span class="meta-item">• Klien: Startup, UMKM, Enterprise</span>
+              <span class="meta-item">• Fokus: kualitas, on time, hasil</span>
+            </div>
+          </div>
+          <div class="hero-card reveal" aria-label="Highlight karya terbaru">
+            <img loading="lazy" src="img/marckup dokumentasi.png" alt="Mockup proyek" />
+            <p>Cuplikan pengalaman kerja bersama team creative.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio -->
+      <section id="portfolio" class="container">
+        <div class="section-head">
+          <h2 class="section-title">Portfolio</h2>
+          <p class="section-desc">Karya pilihan yang merepresentasikan kualitas, proses, dan hasil.</p>
+        </div>
+
+        <div class="grid">
+          <!-- Gambar desain 1 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Flyer Design</span>
+              <img loading="lazy"
+                   src="img/design/design-1.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Flyer Design</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 2 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Rate Card Design</span>
+              <img loading="lazy"
+                   src="img/design/design-2.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Design Ratecard</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 3 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Flyer Design</span>
+              <img loading="lazy"
+                   src="img/design/design-4.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Flyer Kajian</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 4 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Flyer Design</span>
+              <img loading="lazy"
+                   src="img/design/design-3.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Flyer Kajian</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 5 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Flyer Designr</span>
+              <img loading="lazy"
+                   src="img/design/design-5.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Flyer Event</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 6 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Logo Design</span>
+              <img loading="lazy"
+                   src="img/design/design-6.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Logo Design</div>
+              <div class="card-role">Peran: konseptor, Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 7 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Design manipulation</span>
+              <img loading="lazy"
+                   src="img/design/design-7.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Feed Designt</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc">dummy Project</p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 8 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Brand Logo Guidlines</span>
+              <img loading="lazy"
+                   src="img/design/design-8.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Brand Logo Guidlines</div>
+              <div class="card-role">Peran: konseptor, Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 9 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Flyer Design</span>
+              <img loading="lazy"
+                   src="img/design/design-9.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Flyer Design</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 10 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Flyer Design</span>
+              <img loading="lazy"
+                   src="img/design/design-10.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Flyer Design</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Gambar desain 11 -->
+          <article class="card reveal" aria-label="Proyek UI dashboard">
+            <div class="card-media">
+              <span class="badge">Backdrop Design</span>
+              <img loading="lazy"
+                   src="img/design/design-11.jpg"
+                   alt="UI dashboard"
+                   data-type="image" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Backdrop Design</div>
+              <div class="card-role">Peran: Designer</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Video 1 (autoplay di modal) -->
+          <article class="card reveal" aria-label="Video campaign produk">
+            <div class="card-media">
+              <span class="badge">Video</span>
+              <video preload="metadata" poster="img/vIdeo/thumb video-1.png"
+                     data-type="video"
+                     data-src="img/video/video-1.mp4"
+                     aria-label="Klik untuk memutar di layar penuh">
+                <source src="img/vIdeo/video-1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Konten Instagram</div>
+              <div class="card-role">Peran: Video Editor</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Video 2 (autoplay di modal) -->
+          <article class="card reveal" aria-label="Video campaign produk">
+            <div class="card-media">
+              <span class="badge">Video</span>
+              <video preload="metadata" poster="img/vIdeo/thumb video-2.png"
+                     data-type="video"
+                     data-src="img/video/video-2.mp4"
+                     aria-label="Klik untuk memutar di layar penuh">
+                <source src="img/vIdeo/video-2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Konten Reels Instagram</div>
+              <div class="card-role">Peran: Video Editor</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Video 3 (autoplay di modal) -->
+          <article class="card reveal" aria-label="Video campaign produk">
+            <div class="card-media">
+              <span class="badge">Video</span>
+              <video preload="metadata" poster="img/vIdeo/thumb video-3.png"
+                     data-type="video"
+                     data-src="img/video/video-3.mp4"
+                     aria-label="Klik untuk memutar di layar penuh">
+                <source src="img/video/video-3.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <div class="card-title">Konten Reels Instagram</div>
+              <div class="card-role">Peran: Video Editor</div>
+              <p class="card-desc"></p>
+            </div>
+          </article>
+
+          <!-- Preview aplikasi/website -->
+          <article class="card reveal" aria-label="Aplikasi web ringan">
+            <div class="card-media">
+              <span class="badge">Dev</span>
+              <img loading="lazy"
+                   src="https://images.unsplash.com/photo-1526378722484-b78b021b6e47?q=80&w=1600&auto=format&fit=crop"
+                   alt="Aplikasi web"
+                   data-type="iframe"
+                   data-src="https://example.com" />
+            </div>
+            <div class="card-body">
+              <div class="card-title">Web App Performant</div>
+              <div class="card-role">Peran: -</div>
+              <p class="card-desc">-</p>
+            </div>
+          </article>
+
+
+        </div>
+      </section>
+
+
+      <!-- Skills -->
+      <section id="skills" class="container">
+        <div class="section-head">
+          <h2 class="section-title">Skills</h2>
+          <p class="section-desc">Fokus pada kompetensi yang relevan dan kuat.</p>
+        </div>
+
+        <div class="skills">
+          <div class="skill reveal">
+            <div class="skill-head">
+              <div class="skill-icon">UI</div>
+              <span>Design Graphic</span>
+            </div>
+            <div class="tags">
+              <span class="tag">Elemen Dasar Desain</span>
+              <span class="tag">Layout</span>
+              <span class="tag">Tipografi</span>
+              <span class="tag">Hierarki Visual </span>
+            </div>
+          </div>
+
+          <div class="skill reveal">
+            <div class="skill-head">
+              <div class="skill-icon">Vid</div>
+              <span>Videography</span>
+            </div>
+            <div class="tags">
+              <span class="tag">Cinematography</span>
+              <span class="tag">Editing</span>
+              <span class="tag">Color</span>
+              <span class="tag">Sound</span>
+            </div>
+          </div>
+
+          <div class="skill reveal">
+            <div class="skill-head">
+              <div class="skill-icon">FE</div>
+              <span>Frontend Dev</span>
+            </div>
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">React</span>
+              <span class="tag">Performance</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="container">
+        <div class="section-head">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-desc">Tertarik bekerja sama? Ayo mulai percakapan.</p>
+        </div>
+
+        <div class="contact">
+          <div class="contact-card reveal" aria-label="Informasi kontak">
+            <h3 style="margin:0 0 8px 0">Email</h3>
+            <div class="contact-item">
+              <span>Luthfinetwork29@gmail.com</span>
+              <a href="mailto:Luthfinetwork29@gmail.com" class="btn btn-outline" aria-label="Kirim email">Email</a>
+            </div>
+
+            <h3 style="margin:18px 0 8px 0">Sosial</h3>
+            <div class="contact-list">
+              <div class="contact-item">
+                <span>LinkedIn</span>
+                <a href="https://www.linkedin.com/in/muhammad-luthfi-a11a55281?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener">linkedin.com/in/Luthfinuruliman</a>
+              </div>
+              <div class="contact-item">
+                <span>GitHub</span>
+                <a href="https://github.com/luthfiporto" target="_blank" rel="noopener">github.com/luthfiporto</a>
+              </div>
+              <!-- <div class="contact-item">
+                <span>Behance</span>
+                <a href="#" target="_blank" rel="noopener">behance.net/username</a>
+              </div>
+              <div class="contact-item">
+                <span>Dribbble</span>
+                <a href="#" target="_blank" rel="noopener">dribbble.com/username</a>
+              </div> -->
+            </div>
+
+            <div class="cv">
+              <span class="section-desc">Butuh CV ringkas?</span>
+              <a class="btn btn-outline" href="CV Muhammad Luthfi Nurul.pdf" download>Download CV</a>
+            </div>
+          </div>
+
+          <div class="contact-card reveal" aria-label="Catatan profesional">
+            <h3 style="margin:0 0 8px 0">Catatan</h3>
+            <p class="section-desc">Saya tertarik untuk bekerja sama dengan posisi Fulltime WFA, Contract, dan juga Freelance</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© 2025 Luthfinetwork — Semua hak dilindungi.</div>
+    </footer>
+  </div>
+
+  <!-- Modal / Lightbox -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-label="Lightbox media">
+    <div class="modal-inner">
+      <button class="modal-close" type="button" aria-label="Tutup">Tutup ✕</button>
+      <!-- Konten dinamis: image / video / iframe -->
+      <img id="modal-image" class="modal-media" alt="" style="display:none" />
+      <video id="modal-video" class="modal-media" controls playsinline style="display:none"></video>
+      <iframe id="modal-iframe" class="modal-iframe" title="Preview aplikasi" style="display:none"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Fade-in saat masuk viewport
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          io.unobserve(entry.target);
+        }
+      });
+    },{ threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Lightbox: gambar, video, iframe
+    const page = document.getElementById('page');
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalVideo = document.getElementById('modal-video');
+    const modalIframe = document.getElementById('modal-iframe');
+    const closeBtn = modal.querySelector('.modal-close');
+
+    function openModal({ type, src, alt }){
+      // Reset
+      modalImage.style.display = 'none';
+      modalVideo.style.display = 'none';
+      modalIframe.style.display = 'none';
+      modalImage.src = ''; modalVideo.src = ''; modalIframe.src = '';
+
+      // Tampilkan sesuai tipe
+      if(type === 'image'){
+        modalImage.src = src;
+        modalImage.alt = alt || 'Gambar karya';
+        modalImage.style.display = 'block';
+      } else if(type === 'video'){
+        // Autoplay di modal
+        modalVideo.src = src;
+        modalVideo.style.display = 'block';
+        setTimeout(()=> modalVideo.play().catch(()=>{}), 0);
+      } else if(type === 'iframe'){
+        modalIframe.src = src;
+        modalIframe.style.display = 'block';
+      }
+
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden','false');
+      page.classList.add('blur-bg');     // blur background
+      document.body.style.overflow = 'hidden'; // kunci scroll
+    }
+
+    function closeModal(){
+      // Hentikan video
+      try{ modalVideo.pause(); }catch(e){}
+      modalVideo.src = '';
+      modalImage.src = '';
+      modalIframe.src = '';
+
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden','true');
+      page.classList.remove('blur-bg');
+      document.body.style.overflow = '';
+    }
+
+    // Delegasi klik pada media di kartu
+    document.querySelectorAll('.card-media').forEach(media=>{
+      media.addEventListener('click', ()=>{
+        const img = media.querySelector('img');
+        const vid = media.querySelector('video');
+        if(img){
+          const type = img.dataset.type || 'image';
+          const src = img.src;
+          const alt = img.alt;
+          const dataSrc = img.dataset.src; // untuk iframe: gunakan data-src
+          openModal({ type, src: type === 'iframe' ? (dataSrc || src) : src, alt });
+        } else if(vid){
+          const type = vid.dataset.type || 'video';
+          const src = vid.dataset.src || (vid.querySelector('source')?.src);
+          openModal({ type, src });
+        }
+      });
+    });
+
+    // Tutup modal
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+    // Hormati preferensi gerak: matikan autoplay jika reduce motion
+    const prefersReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduceMotion){
+      modalVideo.removeAttribute('autoplay');
+    }
+  </script>
+</body>
+</html>
